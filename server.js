@@ -10,6 +10,12 @@ const upload = multer({ storage: multer.memoryStorage() });
 app.use(cors());
 app.use(express.json());
 
+// Root route so Vercel won't show "Cannot GET /"
+app.get('/', (req, res) => {
+  res.send('🌱 Garden Voice Assistant API is running.');
+});
+
+
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
   .base(process.env.AIRTABLE_BASE_ID);
 
